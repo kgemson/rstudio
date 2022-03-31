@@ -1,6 +1,6 @@
 # 1.3 import dataset
 library(readr)
-X100_sales_records <- read_csv("100_sales_records.csv")
+X100_sales_records <- read_csv("~/NPA/R/100_sales_records.csv")
 View(X100_sales_records)
 
 # 1.4 view dataset type
@@ -68,8 +68,12 @@ barplot(table(asian_sales_priority$Country))
 # the same value. We can consider the european_sales_priority data to be a subset of the main
 # data set.
 attach(X100_sales_records)
-european_sales_priority <- X100_sales_records[Region == "Europe"  & `Order Priority` == "L" , ]
+european_sales_priority <- X100_sales_records[Region == "Europe"  & `Order Priority` == "H" , ]
 plot(table(european_sales_priority$Country))
+detach(X100_sales_records)
+
+european_sales_high_priority = X100_sales_records[Region == "Europe" & 'Order Priority' == "H" , ] 
+european_sales_high_priority = X100_sales_records[Region == "Europe" & `Order Priority` == "H" , ] 
 
 # 1.14 With the table function, create a table using the whole csv file but only include the country
 # and item type columns in the table, then create a barplot of this table.

@@ -13,8 +13,10 @@ library("wordcloud")
 library("wordcloud2")
 library("RColorBrewer")
         
-  text <- readLines("D:\\users\\kgems\\Documents\\NPA\\r\\starwars.txt")
-  docs <- Corpus(VectorSource(text))
+  mytext <- readLines("D:\\users\\kgems\\Documents\\NPA\\r\\number_one_titles.csv")
+  # convert to utf-8 to remove any unreadable characters
+  mytext <- iconv(mytext, to = "UTF-8")
+  docs <- Corpus(VectorSource(mytext))
   # Convert the text to lowercase
   docs <- tm_map(docs, content_transformer(tolower))
   # Remove numbers
@@ -35,7 +37,7 @@ library("RColorBrewer")
   m <- as.matrix(dtm)
   v <- sort(rowSums(m),decreasing=TRUE)
   d <- data.frame(word = names(v),freq=v)
-  head(d, 10)
+  head(d, 30)
   set.seed(1234)
   
   
@@ -52,6 +54,6 @@ library("RColorBrewer")
   
   # Example 3 - Improved cloud with colour palette
   #wordcloud(words = d$word, freq = d$freq, min.freq = 5,max.words=120, random.order=FALSE, rot.per=0.5,colors=brewer.pal(8, "Dark2"))
-  wordcloud2(data=d, size=1.6, color='random-dark', backgroundColor = "black")
+    wordcloud2(data=d, size=1.6, color='random-dark', backgroundColor = "black")
 
   
